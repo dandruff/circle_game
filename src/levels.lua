@@ -11,6 +11,7 @@ module(..., package.seeall)
 LEVEL_WIDTH = 27
 LEVEL_HEIGHT = 10
 
+
 local LEVEL_1 = [==[
 +===   ===================+
 |                         |
