@@ -8,6 +8,7 @@ All rights reserved
 -- levels
 module(..., package.seeall)
 
+
 LEVEL_WIDTH = 27
 LEVEL_HEIGHT = 10
 
