@@ -21,26 +21,39 @@ local currentLocation
 local playerChar = "O"
 
 function initEngine()
-  textObject_Map = display.newText("", 26, 0, myFont, 16 )
+  -- Engine Stuff
+  local myFont = native.systemFont
+
+  for k, v in pairs(native.getFontNames()) do
+    if v == "Courier New" then
+      myFont = "Courier New"
+      break
+    end
+  end
+
+  textObject_Map = display.newText("", 160, 70, myFont, 16 )
   textObject_Map:setTextColor( 255,255,255 )
 end
 
 function updateDraw(gameTime)
-  local level = string.sub(currentLevel_gfx, 1)
-  
-  -- draw the person
-  level[currentLocation] = playerChar
-  
-  -- draw the current level
-  textObject_Map.text = currentLevel_gfx
+  if currentLevel_ndx then
+    local level = string.sub(currentLevel_gfx, 1)
+    
+    -- draw the person    
+    level = string.sub(level, 1, currentLocation - 1) .. playerChar .. string.sub(level, currentLocation + 1, -1)
+    
+    -- draw the current level
+    textObject_Map.text = level
+  else  
+    setLevel(1)
+  end
 end
-
 
 function setLevel(levelIndex)
   currentLevel_ndx = levelIndex
-  local currentLevel_gfx, currentLevel_mov, currentLevel_cfg = levels.getLevel(levelIndex)
+  currentLevel_gfx, currentLevel_mov, currentLevel_cfg = levels.getLevel(levelIndex)
   
-  currentLevel_cfg.start
+  currentLocation = currentLevel_cfg.start
 end
 
 local function teleportAttempt(moveSpace)

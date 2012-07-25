@@ -6,21 +6,18 @@ All rights reserved
 ]]
 
 local levels = require("levels")
+local engine = require("engine")
 
--- Engine Stuff
-local myFont = native.systemFont
+display.setStatusBar(display.HiddenStatusBar)
 
-for k, v in pairs(native.getFontNames()) do
-  if v == "Courier New" then
-    myFont = "Courier New"
-    break
-  end
+engine.initEngine()
+
+local gameTime = 0
+
+function onUpdate()
+  gameTime = gameTime + 1
+  
+  engine.updateDraw(gameTime)
 end
 
-local textTitle = display.newText( "The Circle Game!", 26, -26, myFont, 22 )
-
-local level, level_mov, level_config = levels.getLevel(1)
-
-
-local textObject = display.newText(level, 26, 0, myFont, 16 )
-textObject:setTextColor( 255,255,255 )
+Runtime:addEventListener("enterFrame", onUpdate)

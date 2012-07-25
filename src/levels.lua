@@ -44,12 +44,12 @@ local LEVEL_1_MOV = [==[
 local LEVEL_1_CONFIG = {
   lookup = {
     ["A"] = {
-      goto = 2,   -- map index 
-      from = 5,   -- level string index
+      goto_map = 2,   -- map index 
+      goto_pos = 5,   -- level string index
     },
     ["B"] = {
-      goto = 3,   -- map index
-      from = 277, -- level string index
+      goto_map = 3,   -- map index
+      goto_pos = 277, -- level string index
     },
   },
   start = 79,
@@ -69,7 +69,7 @@ local cfglevel_db = {
 }
 
 function getLevel(level_index)
-  return level_db[level_index], movlevel_db[level_index], cfglevel_db
+  return level_db[level_index], movlevel_db[level_index], cfglevel_db[level_index]
 end
 --    10X26
 
